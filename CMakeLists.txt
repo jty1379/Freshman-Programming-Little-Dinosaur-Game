@@ -3,6 +3,10 @@ project(DinoGame)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# 设置编译器路径
+set(CMAKE_C_COMPILER "E:/CLion 2025.2.2/bin/mingw/bin/gcc.exe")
+set(CMAKE_CXX_COMPILER "E:/CLion 2025.2.2/bin/mingw/bin/g++.exe")
+
 # 设置EGE库路径
 set(EGE_ROOT "E:/CLion 2025.2.2/bin/mingw")
 
