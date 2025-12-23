@@ -1,0 +1,12 @@
+[
+    {
+        "name": "MinGW GCC",
+        "compilers": {
+            "C": "E:/CLion 2025.2.2/bin/mingw/bin/gcc.exe",
+            "CXX": "E:/CLion 2025.2.2/bin/mingw/bin/g++.exe"
+        },
+        "preferredGenerator": {
+            "name": "MinGW Makefiles"
+        }
+    }
+]
