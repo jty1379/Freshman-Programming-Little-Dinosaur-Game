@@ -28,7 +28,9 @@
 ### 方法一：使用CMake（推荐）
 
 1. 安装CMake（版本3.10或更高）和MinGW-w64编译器
-2. 安装EGE图形库：将EGE的头文件（graphics.h, ege.h等）复制到编译器的include目录，将库文件（graphics.lib或libgraphics.a等）复制到编译器的lib目录
+2. 确保EGE图形库已安装到编译器目录：
+   - 将EGE的头文件（graphics.h, ege.h等）复制到编译器的include目录
+   - 将库文件（graphics.lib或libgraphics.a等）复制到编译器的lib目录
 3. 在项目根目录打开终端，执行以下命令：
    ```bash
    mkdir build
@@ -40,6 +42,10 @@
    ```bash
    ./dino_game
    ```
+
+### 方法二：使用其他编译器
+
+如果使用其他编译器（如系统级MinGW或MSYS2），请确保已将EGE库文件复制到该编译器的相应目录中，然后执行相同命令。
 
 ### 方法二：使用CMake并指定额外选项
 
@@ -56,7 +62,7 @@ cmake --build .
 
 1. 下载并安装CLion
 2. 打开项目文件夹
-3. 确保EGE库已正确安装到编译器目录
+3. 确保EGE库已正确安装到CLion内置的编译器目录中
 4. CLion会自动使用项目中的CMakeLists.txt配置进行编译
 
 ## EGE库安装

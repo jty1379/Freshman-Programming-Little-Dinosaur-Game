@@ -3,25 +3,19 @@ project(DinoGame)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# 直接使用编译器内置的EGE库
-# 由于EGE库已安装到编译器的include和lib目录中，直接包含头文件即可
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+# EGE库文件已放置在编译器的标准include和lib目录中，CMake和编译器会自动找到它们
 
-# 查找EGE库文件
+# 设置EGE库名称
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(EGE_LIB_NAME graphics64)
 else()
     set(EGE_LIB_NAME graphics)
 endif()
 
-find_library(EGE_LIBRARY NAMES ${EGE_LIB_NAME} PATHS ${CMAKE_CURRENT_SOURCE_DIR}/lib)
-if(EGE_LIBRARY)
-    message(STATUS "Found EGE library: ${EGE_LIBRARY}")
-else()
-    # 如果在项目目录下没找到，使用链接器能找到的库
-    set(EGE_LIBRARY ${EGE_LIB_NAME})
-    message(STATUS "EGE library will be resolved by linker")
-endif()
+# 由于库文件已在编译器标准路径中，直接使用库名称
+set(EGE_LIBRARY ${EGE_LIB_NAME})
+
+message(STATUS "Using EGE library from compiler standard paths")
 
 # 源文件
 set(SOURCES
