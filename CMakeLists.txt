@@ -45,6 +45,7 @@ target_link_libraries(dino_game
     gdiplus
     winmm
     -static
+    -mwindows  # 隐藏控制台窗口
 )
 
 # 设置输出目录

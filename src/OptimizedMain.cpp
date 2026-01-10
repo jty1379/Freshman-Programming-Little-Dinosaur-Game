@@ -15,9 +15,6 @@
 #include <iostream>
 #include <windows.h>
 
-// 隐藏控制台窗口，只显示游戏图形窗口
-#pragma comment(linker, "/subsystem:windows /entry:mainCRTStartup")
-
 /**
  * @brief 程序主入口
  * @return 程序退出状态码
