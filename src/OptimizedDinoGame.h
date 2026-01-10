@@ -6,11 +6,8 @@
 #include <graphics.h>
 #include <ege.h>
 
-// 前向声明
 class Dinosaur;
 class Obstacle;
-
-// 恐龙类
 class Dinosaur {
 private:
     float x, y;
@@ -32,7 +29,6 @@ public:
     void update();
     void render();
 
-    // Getters
     float getX() const { return x; }
     float getY() const { return y; }
     float getWidth() const { return DINO_WIDTH; }
@@ -40,11 +36,9 @@ public:
     bool getIsJumping() const { return isJumping; }
     bool getIsDucking() const { return isDucking; }
 
-    // Setters
     void setPosition(float x, float y);
 };
 
-// 障碍物基类
 class Obstacle {
 protected:
     float x, y;
@@ -59,14 +53,12 @@ public:
     virtual void render();
     virtual bool checkCollision(const Dinosaur& dino);
 
-    // Getters
     float getX() const { return x; }
     float getY() const { return y; }
     float getWidth() const { return width; }
     float getHeight() const { return height; }
 };
 
-// 仙人掌类
 class Cactus : public Obstacle {
 public:
     Cactus(float x, float y);
@@ -77,7 +69,6 @@ public:
     virtual bool checkCollision(const Dinosaur& dino) override;
 };
 
-// 飞鸟类
 class Bird : public Obstacle {
 private:
     int wingPosition;
@@ -92,7 +83,6 @@ public:
     virtual bool checkCollision(const Dinosaur& dino) override;
 };
 
-// 背景类
 class Background {
 private:
     float scrollSpeed;
@@ -110,7 +100,6 @@ public:
     bool getIsNightMode() const { return isNightMode; }
 };
 
-// 得分类
 class ScoreManager {
 private:
     int currentScore;
@@ -133,7 +122,6 @@ public:
     bool getNightMode() const { return isNightMode; }
 };
 
-// 主游戏类
 class DinoGame {
 private:
     Dinosaur player;

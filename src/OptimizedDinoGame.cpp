@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <string>
 
-// Dinosaur 实现
 Dinosaur::Dinosaur() : x(50), y(340 - 60), velocityY(0), isJumping(false), isDucking(false), groundLevel(340) {}
 
 Dinosaur::~Dinosaur() {}
@@ -64,7 +63,6 @@ void Dinosaur::setPosition(float x, float y) {
     this->y = y;
 }
 
-// Obstacle 实现
 Obstacle::Obstacle(float x, float y, float width, float height) 
     : x(x), y(y), width(width), height(height), speed(5) {}
 
@@ -86,7 +84,6 @@ bool Obstacle::checkCollision(const Dinosaur& dino) {
             dino.getY() < y + height);
 }
 
-// Cactus 实现
 Cactus::Cactus(float x, float y) : Obstacle(x, y, 20, 40) {}
 
 Cactus::Cactus(float x, float y, float height) : Obstacle(x, y - height, 20, height) {}
@@ -108,7 +105,6 @@ bool Cactus::checkCollision(const Dinosaur& dino) {
     return Obstacle::checkCollision(dino);
 }
 
-// Bird 实现
 Bird::Bird(float x, float y) : Obstacle(x, y, 30, 20), wingPosition(0), animationCounter(0) {}
 
 Bird::~Bird() {}
@@ -160,7 +156,6 @@ bool Bird::checkCollision(const Dinosaur& dino) {
             dino.getY() < y + height);
 }
 
-// Background 实现
 Background::Background() : scrollSpeed(2), groundOffset(0), isNightMode(false) {}
 
 Background::~Background() {}
@@ -210,7 +205,6 @@ void Background::toggleNightMode(bool night) {
     isNightMode = night;
 }
 
-// ScoreManager 实现
 ScoreManager::ScoreManager() : currentScore(0), highScore(0) {}
 
 ScoreManager::~ScoreManager() {}
@@ -247,7 +241,6 @@ void ScoreManager::incrementScore(int points) {
     currentScore += points;
 }
 
-// DinoGame 实现
 DinoGame::DinoGame() : isRunning(false), isGameOver(false), gameSpeed(5), frameCount(0), gameOverDelay(0) {}
 
 DinoGame::~DinoGame() {
@@ -281,8 +274,8 @@ void DinoGame::update() {
     
     if (isGameOver) {
         gameOverDelay++;
-        if (gameOverDelay > 90) {  // 等待约2.7秒 (90帧 * 30ms)
-            gameOverDelay = 91;  // 标记倒计时结束
+        if (gameOverDelay > 90) {
+            gameOverDelay = 91;
         }
         return;
     }
@@ -363,40 +356,33 @@ void DinoGame::handleInput() {
 }
 
 void DinoGame::showGameOverScreen() {
-    // 设置字体和颜色（使用粗体字体）
     setfont(30, 0, "Arial Bold");
     setcolor(RED);
     
-    // 设置透明背景
     setbkmode(TRANSPARENT);
     
-    // 居中显示Game Over
     const char* gameOverText = "Game Over";
     int gameOverTextWidth = textwidth(gameOverText);
-    int gameOverXPos = (800 - gameOverTextWidth) / 2;  // 800是窗口宽度
+    int gameOverXPos = (800 - gameOverTextWidth) / 2;
     outtextxy(gameOverXPos, 150, gameOverText);
     
-    // 显示分数并居中
     std::string scoreText = "Score: " + std::to_string(score.getCurrentScore());
     int scoreTextWidth = textwidth(scoreText.c_str());
-    int scoreXPos = (800 - scoreTextWidth) / 2;  // 800是窗口宽度
+    int scoreXPos = (800 - scoreTextWidth) / 2;
     outtextxy(scoreXPos, 200, scoreText.c_str());
     
     setfont(20, 0, "Arial Bold");
     
-    // 显示倒计时提示
     if (gameOverDelay > 0 && gameOverDelay <= 90) {
-        int remainingTime = (90 - gameOverDelay) / 30 + 1;  // 计算剩余秒数
+        int remainingTime = (90 - gameOverDelay) / 30 + 1;
         std::string restartText = "Press any key to restart in " + std::to_string(remainingTime) + "s";
-        // 动态计算文本宽度以实现居中
         int textWidth = textwidth(restartText.c_str());
-        int xPos = (800 - textWidth) / 2;  // 800是窗口宽度
+        int xPos = (800 - textWidth) / 2;
         outtextxy(xPos, 250, restartText.c_str());
     } else if (gameOverDelay >= 91) {
         const char* restartText = "Press any key to restart";
-        // 动态计算文本宽度以实现居中
         int textWidth = textwidth(restartText);
-        int xPos = (800 - textWidth) / 2;  // 800是窗口宽度
+        int xPos = (800 - textWidth) / 2;
         outtextxy(xPos, 250, restartText);
     }
 }
@@ -409,12 +395,10 @@ void DinoGame::generateObstacle() {
     if (frameCount % std::max(20, 80 - gameSpeed * 2) == 0) {
         int type = rand() % 6;
         if (type < 3) {
-            // 生成随机高度的仙人掌(20-80像素)
-            int cactusHeight = 20 + (rand() % 7) * 10;  // 20, 30, 40, ..., 80
+            int cactusHeight = 20 + (rand() % 7) * 10;
             obstacles.push_back(std::make_unique<Cactus>(800, 340, cactusHeight));
         } else {
-            // 生成随机高度的鸟(260-320像素)
-            int birdHeight = 260 + (rand() % 7) * 10;  // 260, 270, 280, ..., 320
+            int birdHeight = 260 + (rand() % 7) * 10;
             obstacles.push_back(std::make_unique<Bird>(800, birdHeight));
         }
     }
